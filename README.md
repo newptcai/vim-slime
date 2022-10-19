@@ -210,12 +210,21 @@ To work properly, `kitty` must also be started with the following options:
 kitty -o allow_remote_control=yes --listen-on unix:/tmp/mykitty
 ```
 
-See more [here](https://sw.kovidgoyal.net/kitty/remote-control.html). This can also be added to your `kitty.conf` file as:
+The parameter after `--listen-on` must match what you set when vim-slime is invoked for the first time.
+If you left it blank, 
+it must match KITTY_LISTEN_ON in the *shell running vim*.
+See more [here](https://sw.kovidgoyal.net/kitty/remote-control.html). 
+
+Note that, adding the following to your `kitty.conf` file will *not* work.
 
 ```
 allow_remote_control yes
 listen_on unix:/tmp/mykitty
 ```
+
+This is because kitty will append `{kitty_pid}` to `unix:/tmp/mykitty`.
+See the [documentation](https://sw.kovidgoyal.net/kitty/conf/#opt-kitty.listen_on).
+You can create a bash script or alias to avoid typing the parameters each time.
 
 ### X11
 
